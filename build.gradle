@@ -1,0 +1,62 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'auction-hsa'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    // tag::jetty[]
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "spring-boot-starter-tomcat"
+    }
+    compile("org.springframework.boot:spring-boot-starter-jetty")
+    // end::jetty[]
+    // tag::actuator[]
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    // end::actuator[]
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    
+    // https://mvnrepository.com/artifact/postgresql/postgresql
+	compile group: 'postgresql', name: 'postgresql', version: '9.1-901-1.jdbc4'
+	
+	// https://mvnrepository.com/artifact/org.hibernate/hibernate-core
+	compile group: 'org.hibernate', name: 'hibernate-core', version: '4.3.11.Final'
+	
+    // https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager
+	compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '4.3.11.Final'	
+
+	// https://mvnrepository.com/artifact/org.hibernate/hibernate-validator
+	compile group: 'org.hibernate', name: 'hibernate-validator', version: '4.3.2.Final'
+	
+	// https://mvnrepository.com/artifact/org.hibernate/hibernate-envers
+	compile group: 'org.hibernate', name: 'hibernate-envers', version: '4.3.11.Final'
+	
+	// https://mvnrepository.com/artifact/org.springframework/spring-orm
+	compile group: 'org.springframework', name: 'spring-orm', version: '4.3.2.RELEASE'
+	
+	testCompile("junit:junit")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.0'
+}
