@@ -2,10 +2,8 @@ package edu.auctionhsa.model;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,13 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -29,10 +25,6 @@ import javax.validation.constraints.Size;
 @Entity
 @org.hibernate.envers.Audited
 @Table(name = "users")
-@NamedQueries({
-    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "Users.findById", query = "SELECT u FROM User u WHERE u.id = :id")})
-
 public class User implements Serializable {
     
     @Id
@@ -51,6 +43,7 @@ public class User implements Serializable {
     @Size(max = 64)
     private String usr;
     
+    @NotNull
     @Size(max = 1024)
     private String pwd;
 
@@ -58,7 +51,7 @@ public class User implements Serializable {
     private Collection<Item> items;
     
     @JoinColumn(name = "id_divipola", referencedColumnName = "id")
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Divipola city;
     
     @Embedded

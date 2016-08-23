@@ -22,11 +22,6 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @org.hibernate.envers.Audited
-@Table(name = "divipola")
-@NamedQueries({
-    @NamedQuery(name = "Divipola.findAll", query = "SELECT d FROM Divipola d"),
-    @NamedQuery(name = "Divipola.findById", query = "SELECT d FROM Divipola d WHERE d.id = :id"),
-    @NamedQuery(name = "Divipola.findByName", query = "SELECT d FROM Divipola d WHERE d.name = :name")})
 public class Divipola implements Serializable {
 
     @Id

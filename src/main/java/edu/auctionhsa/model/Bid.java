@@ -26,10 +26,6 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @org.hibernate.envers.Audited
-@Table(name = "bids")
-@NamedQueries({
-    @NamedQuery(name = "Bids.findAll", query = "SELECT b FROM Bid b"),
-    @NamedQuery(name = "Bids.findById", query = "SELECT b FROM Bid b WHERE b.id = :id")})
 @org.hibernate.annotations.Immutable
 public class Bid implements Serializable, Comparable<Bid>{
     

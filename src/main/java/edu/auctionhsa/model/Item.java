@@ -37,10 +37,6 @@ import org.hibernate.validator.constraints.Range;
  */
 @Entity
 @org.hibernate.envers.Audited
-@Table(name = "items")
-@NamedQueries({
-    @NamedQuery(name = "Items.findAll", query = "SELECT i FROM Item i"),
-    @NamedQuery(name = "Items.findById", query = "SELECT i FROM Item i WHERE i.id = :id")})
 public class Item implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -84,12 +80,14 @@ public class Item implements Serializable {
     @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
     private Set<Bid> bids = new TreeSet<>();
     
-    /*@org.hibernate.annotations.Formula(
-        "coalesce((select max(b.AMOUNT) from BID b where b.ITEM_ID = ID), 0)"
+    @org.hibernate.annotations.Formula(
+        "coalesce((select max(b.AMOUNT) from BID b where b.id_item = ID), 0)"
     )
-	private Long maxBidAmount;*/
+    @org.hibernate.envers.NotAudited
+	private Long maxBidAmount;
     
     //Auditory 
+   
     @Size(max = 64)
     @Column(name = "aud_usr_modified")
     private String audUsrModified = "DEFAULT";
@@ -186,9 +184,9 @@ public class Item implements Serializable {
         this.seller = idUser;
     }
     
-    /*public Long getMaxBidAmount() {
+    public Long getMaxBidAmount() {
 		return maxBidAmount;
-	}*/
+	}
     
     public boolean isValidBidAmount(Long highestBidAmount, Long newBidAmount) {
         return newBidAmount != null && newBidAmount.compareTo(getInitialPrice()) == 1
