@@ -20,6 +20,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author Jerson Viveros
  */
@@ -42,10 +44,12 @@ public class Bid implements Serializable, Comparable<Bid>{
     @Temporal(TemporalType.TIMESTAMP)
     private Date createOn;
 
+    @JsonIgnore
     @JoinColumn(name = "id_item", referencedColumnName = "id")
     @ManyToOne(optional =false, fetch = FetchType.LAZY, cascade= CascadeType.MERGE)
     private Item item;
     
+    @JsonIgnore
     @JoinColumn(name = "id_user", referencedColumnName = "id")
     @ManyToOne(optional =false, fetch = FetchType.LAZY, cascade= CascadeType.MERGE)
     private User user;

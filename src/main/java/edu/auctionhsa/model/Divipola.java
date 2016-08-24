@@ -32,7 +32,7 @@ public class Divipola implements Serializable {
     private String name;
     
     @JoinColumn(name = "id_divipola", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Divipola department;
 
     public Divipola() {

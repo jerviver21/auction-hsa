@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,6 +19,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author Jerson Viveros
@@ -37,21 +40,20 @@ public class User implements Serializable {
     
     @NotNull
     @Size(min = 1, max = 64)
+    @Column(unique=true)
     private String numId;
     
     @NotNull
     @Size(max = 64)
+    @Column(unique=true)
     private String usr;
     
     @NotNull
     @Size(max = 1024)
     private String pwd;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seller", fetch = FetchType.LAZY)
-    private Collection<Item> items;
     
     @JoinColumn(name = "id_divipola", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Divipola city;
     
     @Embedded
@@ -129,13 +131,6 @@ public class User implements Serializable {
         this.audUsrModified = audUsrModified;
     }
 
-    public Collection<Item> getItemsCollection() {
-        return items;
-    }
-
-    public void setItemsCollection(Collection<Item> itemsCollection) {
-        this.items = itemsCollection;
-    }
 
     public Divipola getIdDivipola() {
         return city;

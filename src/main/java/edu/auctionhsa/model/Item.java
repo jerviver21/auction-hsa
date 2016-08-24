@@ -32,6 +32,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author Jerson Viveros
  */
@@ -67,9 +69,8 @@ public class Item implements Serializable {
     @Range(min=0)
     private Long initialPrice = 0L;
     
-    @NotNull
     @JoinColumn(name = "id_user", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private User seller;
     
     @ElementCollection
@@ -77,7 +78,7 @@ public class Item implements Serializable {
     @Embedded
     private Set<Image> images = new HashSet<>();
     
-    @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "item", fetch = FetchType.EAGER)
     private Set<Bid> bids = new TreeSet<>();
     
     @org.hibernate.annotations.Formula(
@@ -176,11 +177,11 @@ public class Item implements Serializable {
         this.bids = bidsCollection;
     }
 
-    public User getIdSeller() {
+    public User getSeller() {
         return seller;
     }
 
-    public void setIdSeller(User idUser) {
+    public void setSeller(User idUser) {
         this.seller = idUser;
     }
     
@@ -188,9 +189,9 @@ public class Item implements Serializable {
 		return maxBidAmount;
 	}
     
-    public boolean isValidBidAmount(Long highestBidAmount, Long newBidAmount) {
+    public boolean isValidBidAmount(Long newBidAmount) {
         return newBidAmount != null && newBidAmount.compareTo(getInitialPrice()) == 1
-            && (highestBidAmount == null || newBidAmount.compareTo(highestBidAmount) == 1);
+            && (maxBidAmount == null || newBidAmount.compareTo(maxBidAmount) == 1);
     }
 
     @Override
