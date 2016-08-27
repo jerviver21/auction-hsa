@@ -78,7 +78,7 @@ public class Item implements Serializable {
     @Embedded
     private Set<Image> images = new HashSet<>();
     
-    @OneToMany(mappedBy = "item", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
     private Set<Bid> bids = new TreeSet<>();
     
     @org.hibernate.annotations.Formula(

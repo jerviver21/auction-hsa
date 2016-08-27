@@ -53,7 +53,7 @@ public class User implements Serializable {
     private String pwd;
     
     @JoinColumn(name = "id_divipola", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Divipola city;
     
     @Embedded
