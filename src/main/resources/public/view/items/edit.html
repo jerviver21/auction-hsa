@@ -1,0 +1,99 @@
+<div class="panel panel-success"  ng-controller="ItemCtrl as ctrl">
+	<div 	class="alert alert-warning" 
+			role="alert"
+			ng-bind="ItemCtrl.errorMessage" 
+			ng-show="ItemCtrl.errorMessage">
+	</div>
+	
+	<div class="panel-body form-auction1" >
+		<form ng-submit="ctrl.save()" name="form_item" class="form-horizontal">
+			<input name="id" type="hidden" ng-model="ctrl.item.id"/>
+			<div class="form-group">
+				<!-- Validations -->
+				<div ng-show="form1.name.$dirty "> 
+					<div ng-show="form1.name.$error.required" class="alert alert-warning" role="alert">
+						<span >
+							Required.
+						</span>
+					</div>
+				</div>
+				<!-- *** -->
+				<div class="col-xs-5">
+					<input name="name" type="text" ng-model="ctrl.item.name"  
+						   ng-required="true" class="form-control " placeholder="Name" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<!-- Validations -->
+				<div ng-show="form1.description.$dirty "> 
+					<div ng-show="form1.description.$error.required" class="alert alert-warning" role="alert">
+						<span >
+							Required.
+						</span>
+					</div>
+				</div>
+				<!-- *** -->
+				<div class="col-xs-5">
+					<input name="description" type="text" ng-model="ctrl.item.description"  
+						   ng-required="true" class="form-control " placeholder="Description" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<!-- Validations -->
+				<div ng-show="form1.auctionEnd.$dirty "> 
+					<div ng-show="form1.auctionEnd.$error.required" class="alert alert-warning" role="alert">
+						<span >
+							Required.
+						</span>
+					</div>
+				</div>
+				<!-- *** -->
+				<div class="col-xs-5">
+					<input name="auctionEnd" type="text" ng-model="ctrl.item.auctionEnd"  
+						   ng-required="true" class="form-control " placeholder="auctionEnd" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<!-- Validations -->
+				<div ng-show="form1.initialPrice.$dirty "> 
+					<div ng-show="form1.initialPrice.$error.required" class="alert alert-warning" role="alert">
+						<span >
+							Required.
+						</span>
+					</div>
+				</div>
+				<!-- *** -->
+				<div class="col-xs-5">
+					<input name="initialPrice" type="text" ng-model="ctrl.item.initialPrice"  
+						   ng-required="true" class="form-control " placeholder="Initial Price" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<!-- Validations -->
+				<div ng-show="form1.isPublished.$dirty "> 
+					<div ng-show="form1.isPublished.$error.required" class="alert alert-warning" role="alert">
+						<span >
+							Required.
+						</span>
+					</div>
+				</div>
+				<!-- *** -->
+				<div class="col-xs-5">
+					<input name="isPublished" type="text" ng-model="ctrl.item.isPublished"  
+						   ng-required="true" class="form-control " placeholder="isPublished" />
+				</div>
+			</div>
+		
+	
+			<div class="form-group">
+				<div class="col-xs-5">
+					<input 	type="submit" value="Submit" class="btn btn-success" ng-disabled="form1.$invalid"/>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

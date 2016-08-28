@@ -6,6 +6,7 @@ import javax.persistence.NoResultException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,8 +35,8 @@ public class ItemController {
 		return items;
 	}
 	
-	@RequestMapping(value="/items/find", method=RequestMethod.GET)
-	public Item getItem(Long id){
+	@RequestMapping(value="/items/{id}", method=RequestMethod.GET)
+	public Item getItem(@PathVariable Long id){
 		Item item = null;
 		try{
 			item = itemDAO.findById(id);

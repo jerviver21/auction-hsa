@@ -1,0 +1,55 @@
+<!-- File: chapter1/basic-angularjs-app.html -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<link rel="stylesheet" href="../css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="../css/bootstrap-theme.min.css"/>
+		<link rel="stylesheet" href="../css/auctionhsa.css"/>
+	</head>
+	<body ng-app="auctionhsa" class="landing" >
+	
+		<!-- Barra superior y opciones de menu -->
+	    <nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+			  <div id="navbar" class="navbar-collapse collapse">
+			    <ul class="nav navbar-nav">
+			      <li><a href="#">Home</a></li>
+			      <li class="dropdown">
+			        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Items <span class="caret"></span></a>
+			        <ul class="dropdown-menu" role="menu">
+			          <li><a href="#/item_list">My Items</a></li>
+			          <li><a href="#/item_edit">Add Item</a></li>
+			        </ul>
+			      </li>
+			    </ul>
+			  </div><!--/.nav-collapse -->
+			</div>
+	    	<div class="pull-right">
+				<span>
+					<a href="#/emp_logout">Logout</a>
+				</span>
+			</div>
+	    </nav>
+	    <!-- Fin de barra superior -->
+	
+		<br/>
+		
+		<div><h3>Auctions App</h3></div>
+		
+		<div ng-view="" class="div-main"></div>
+	
+		<!-- Dependencies -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.min.js"></script>
+		<script src="../js/ng/modules/services_module.js"></script>
+		<script src="../js/ng/modules/controllers_module.js"></script>
+		<script src="../js/ng/modules/main_module.js"></script>
+		<script src="../js/ng/items/services/service.js"></script>
+		<script src="../js/ng/items/controllers/controller.js"></script>
+		
+
+	</body>
+</html>

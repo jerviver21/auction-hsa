@@ -1,0 +1,31 @@
+<div class="container theme-showcase" role="main"  ng-controller="ItemCtrl as ctrl">
+	<div 	class="alert alert-danger" 
+			ng-bind="ItemCtrl.errorMessage" 
+			ng-show="ItemCtrl.errorMessage">
+	</div>
+	
+	<table class="table">
+		<thead>
+               <tr>
+                   <th scope="col">Name</th>
+                   <th scope="col">Description</th>
+                   <th scope="col">End Date</th>
+                   <th scope="col">Initial Price</th>
+                   <th scope="col">Actions</th>
+               </tr>
+           </thead>
+	
+		<tbody>
+			<tr ng-repeat="item in ctrl.items">
+				<td><span ng-bind="item.name"></span></td>
+				<td><span ng-bind="item.description"></span></td>
+				<td><span ng-bind="item.auctionEnd"></span></td>
+				<td>{{item.initialPrice | currency:"$"}}</span></td>
+				<td><a ng-href="#/item_edit">
+						<span class="glyphicon glyphicon-pencil" ng-click="ctrl.edit(item.id)"></span>
+					</a></td>							
+			</tr>
+		</tbody>
+	</table>
+
+</div>
