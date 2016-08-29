@@ -1,1 +1,1 @@
-angular.module("auctionhsa.services", []);
+angular.module("auctionhsa.services", ["ngResource"]);

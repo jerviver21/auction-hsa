@@ -1,1 +1,1 @@
-angular.module("auctionhsa.controllers", []);
+angular.module("auctionhsa.controllers", ['ngMaterial', 'ngMessages']);

@@ -91,6 +91,7 @@ public class Item implements Serializable {
    
     @Size(max = 64)
     @Column(name = "aud_usr_modified")
+    @JsonIgnore
     private String audUsrModified = "DEFAULT";
 
     public Item() {

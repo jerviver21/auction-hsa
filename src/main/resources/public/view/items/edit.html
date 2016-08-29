@@ -1,99 +1,65 @@
-<div class="panel panel-success"  ng-controller="ItemCtrl as ctrl">
-	<div 	class="alert alert-warning" 
-			role="alert"
-			ng-bind="ItemCtrl.errorMessage" 
-			ng-show="ItemCtrl.errorMessage">
-	</div>
+<div class="panel panel-default"  ng-controller="ItemCtrl as ctrl">
+
+	<div class="panel-heading">Item Data</div>
+
+	
 	
 	<div class="panel-body form-auction1" >
-		<form ng-submit="ctrl.save()" name="form_item" class="form-horizontal">
-			<input name="id" type="hidden" ng-model="ctrl.item.id"/>
-			<div class="form-group">
-				<!-- Validations -->
-				<div ng-show="form1.name.$dirty "> 
-					<div ng-show="form1.name.$error.required" class="alert alert-warning" role="alert">
-						<span >
-							Required.
-						</span>
-					</div>
-				</div>
-				<!-- *** -->
-				<div class="col-xs-5">
-					<input name="name" type="text" ng-model="ctrl.item.name"  
-						   ng-required="true" class="form-control " placeholder="Name" />
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<!-- Validations -->
-				<div ng-show="form1.description.$dirty "> 
-					<div ng-show="form1.description.$error.required" class="alert alert-warning" role="alert">
-						<span >
-							Required.
-						</span>
-					</div>
-				</div>
-				<!-- *** -->
-				<div class="col-xs-5">
-					<input name="description" type="text" ng-model="ctrl.item.description"  
-						   ng-required="true" class="form-control " placeholder="Description" />
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<!-- Validations -->
-				<div ng-show="form1.auctionEnd.$dirty "> 
-					<div ng-show="form1.auctionEnd.$error.required" class="alert alert-warning" role="alert">
-						<span >
-							Required.
-						</span>
-					</div>
-				</div>
-				<!-- *** -->
-				<div class="col-xs-5">
-					<input name="auctionEnd" type="text" ng-model="ctrl.item.auctionEnd"  
-						   ng-required="true" class="form-control " placeholder="auctionEnd" />
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<!-- Validations -->
-				<div ng-show="form1.initialPrice.$dirty "> 
-					<div ng-show="form1.initialPrice.$error.required" class="alert alert-warning" role="alert">
-						<span >
-							Required.
-						</span>
-					</div>
-				</div>
-				<!-- *** -->
-				<div class="col-xs-5">
-					<input name="initialPrice" type="text" ng-model="ctrl.item.initialPrice"  
-						   ng-required="true" class="form-control " placeholder="Initial Price" />
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<!-- Validations -->
-				<div ng-show="form1.isPublished.$dirty "> 
-					<div ng-show="form1.isPublished.$error.required" class="alert alert-warning" role="alert">
-						<span >
-							Required.
-						</span>
-					</div>
-				</div>
-				<!-- *** -->
-				<div class="col-xs-5">
-					<input name="isPublished" type="text" ng-model="ctrl.item.isPublished"  
-						   ng-required="true" class="form-control " placeholder="isPublished" />
-				</div>
-			</div>
 		
-	
-			<div class="form-group">
-				<div class="col-xs-5">
-					<input 	type="submit" value="Submit" class="btn btn-success" ng-disabled="form1.$invalid"/>
-				</div>
-			</div>
-		</form>
+		<div 	class="alert alert-warning" 
+				role="alert"
+				ng-bind="ItemCtrl.errorMessage" 
+				ng-show="ItemCtrl.errorMessage">
+		</div>
+
+		<md-content layout-padding>
+			<form ng-submit="ctrl.save()" name="form_item">
+				
+				<input name="id" type="hidden" ng-model="ctrl.item.id"/>
+				
+
+				<md-input-container class="md-block">
+				  <label>Name</label>
+				  <input required name="name" ng-model="ctrl.item.name">
+				  <div ng-messages="form_item.description.$error">
+				    <div ng-message="required">This is required.</div>
+				  </div>
+				</md-input-container>
+				
+				<md-input-container class="md-block">
+				  <label>Description</label>
+				  <input required  name="description" ng-model="ctrl.item.description">
+				  <div ng-messages="form_item.description.$error">
+				    <div ng-message="required">This is required.</div>
+				  </div>
+				</md-input-container>
+			
+				<md-input-container class="md-icon-float md-block">
+				  <label>Initial Price</label>
+				  <md-icon md-svg-src="../images/icons/ic_attach_money_black_18px.svg"></md-icon>
+				  <input required name="initial_price" type="number" ng-model="ctrl.item.initialPrice">
+				  <div ng-messages="form_item.initial_price.$error">
+				    <div ng-message="required">This is required.</div>
+				  </div>
+				</md-input-container>
+
+				<div layout="row" layout-align="start">
+					<md-input-container flex="50">
+						<label>Auction End Date</label>
+						<md-datepicker ng-model="ctrl.item.auctionEnd" ng-required="true"  md-placeholder="Enter date"></md-datepicker>
+					</md-input-container>
+					<md-input-container flex="50">
+						<md-checkbox ng-model="ctrl.item.isPublished">Available for auction?</md-checkbox>
+					</md-input-container>
+			    </div>
+
+				<div class="form-group">
+					<div class="col-xs-5">
+						<input type="submit" class="btn btn-success btn-lg" value="Submit" ng-disabled="form_item.$invalid"/>
+			    	</div>
+			    </div>
+
+			</form>
+		</md-content>
 	</div>
 </div>

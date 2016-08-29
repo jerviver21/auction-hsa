@@ -15,9 +15,13 @@ a,a:visited{
 }
 
 .form-auction1{
-	width:70%; 
+	width:50%; 
 	margin: 0 auto;
 	padding-top: 50px;
+}
+
+.form-title1{
+	text-align: center;
 }
 
 .form-control{
@@ -26,6 +30,6 @@ a,a:visited{
   width:95%;
   display: block;
   padding: 10px 0px;
-  font-size: 1.2em;
+  font-size: 12px;
 }
 
