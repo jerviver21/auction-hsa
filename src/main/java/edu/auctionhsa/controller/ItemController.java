@@ -49,16 +49,11 @@ public class ItemController {
 	}
 	
 	@RequestMapping(value="/items", method=RequestMethod.POST)
-	public boolean saveItem(@RequestBody @Valid Item item){
-		boolean saveSucessful = false;
-		try{
-			item.setSeller(new User(1L));
-			itemDAO.save(item);
-			saveSucessful = true;
-		}catch(Exception e2){
-			e2.printStackTrace();
-		}
-		return saveSucessful;
+	public Item saveItem(@RequestBody @Valid Item item){
+		Item itemResp = null;
+		item.setSeller(new User(1L));
+		itemResp = itemDAO.save(item);
+		return itemResp;
 	}
 	
 	@RequestMapping(value="/items", method=RequestMethod.DELETE)

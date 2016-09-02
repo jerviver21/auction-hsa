@@ -50,14 +50,13 @@ public class Item implements Serializable {
     
     @NotNull
     @Size(min = 1, max = 64)
+    @Column(unique=true)
     private String name;
     
     @Size(max = 1024)
-    @Column(name = "description")
     private String description;
     
     @NotNull
-    @Column(name = "is_published")
     private boolean isPublished = false;
     
     @NotNull
