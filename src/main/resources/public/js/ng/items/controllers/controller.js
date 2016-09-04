@@ -1,14 +1,16 @@
 var module = angular.module("auctionhsa.controllers");
-module.controller("ItemCtrl", ['$routeParams', '$mdDialog',"Item", function($routeParams, $mdDialog, Item) {
+module.controller("ItemCtrl", ['$location', '$routeParams', "Item", "popupService", "fileUpload", 
+function($location, $routeParams,  Item, popupService, fileUpload) {
 	var self = this;
 	self.item = new Item();
 	
 	self.edit = function(item_id){
 		Item.get({id:item_id}, function(data) {
+			data.auctionEnd = new Date(data.auctionEnd);
 			self.item = data;
 		}, function(err) {
-			self.errorMessage = "Getting process failed!! "+err;
-		    console.log(err);
+			self.errorMessage = "Reading process failed!! "+err;
+			popupService.showAlert("Error", err.data.message);
 		});
 	}
 	
@@ -16,13 +18,49 @@ module.controller("ItemCtrl", ['$routeParams', '$mdDialog',"Item", function($rou
 	  Item.save(self.item,
 	    function(resp, headers){
 		  self.item.id = resp.id;
-	      self.showAlert("Success","The item was sucessfully saved!!");
+		  //popupService.showAlert("Success","The item was sucessfully saved!!");
+		  $location.path("/item_edit_image");
 	    },
 	    function(err){
 	      self.errorMessage = "Saving process failed!! "+err;
-	      self.showAlert("Error", err.data.message);
+	      popupService.showAlert("Error", err.data.message);
 	    });
 	};
+	
+	self.remove = function(item){
+		popupService.showConfirm('Desea borrar el Item?','').then(function() {
+			console.log("Remover: "+item.id);
+			Item.remove(item,
+			    function(resp, headers){
+				  self.item.id = resp.id;
+				  popupService.showAlert("Success","The item was sucessfully remove!!");
+				  self.items = Item.query();
+			    },
+			    function(err){
+			      self.errorMessage = "Saving process failed!! "+err;
+			      popupService.showAlert("Error", err.data.message);
+			    });
+		}, function() {
+		  console.log("No remover");
+		});
+	}
+	
+	self.uploadFile = function(){
+		console.log('file is ' );
+        console.dir(self.file);
+        var uploadUrl = "/items/image/upload";
+        fileUpload.uploadFileToUrl(self.file, uploadUrl, 5432).then(
+        		function(data){
+        			console.log('Cargado');
+        			console.log(data);
+        		},
+        		function(err){
+        			console.log('Error, no cargado');
+        			console.log(err);
+        		}
+        );
+		
+	}
 	
 	//Load the init data.
 	if($routeParams.item_id){
@@ -30,20 +68,5 @@ module.controller("ItemCtrl", ['$routeParams', '$mdDialog',"Item", function($rou
 	}else{
 		self.items = Item.query();
 	}
-	
-	
-	//Controlling efects in view
-	self.showAlert = function(title, content) {
-		$mdDialog.show( 
-				$mdDialog.alert().parent(angular.element(document.querySelector('#popupContainer')))
-				.clickOutsideToClose(true)
-				.title(title)
-				.textContent(content)
-				.ariaLabel('Alert Dialog Demo')
-				.theme('altTheme')
-				.ok('Got it!')
-				
-		    );
-	};
-	
+
 }]);

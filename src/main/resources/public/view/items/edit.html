@@ -8,8 +8,8 @@
 		
 		<div 	class="alert alert-warning" 
 				role="alert"
-				ng-bind="ItemCtrl.errorMessage" 
-				ng-show="ItemCtrl.errorMessage">
+				ng-show="ctrl.errorMessage" >
+				{{ctrl.errorMessage}}
 		</div>
 
 		<md-content layout-padding>
@@ -55,7 +55,7 @@
 
 				<div class="form-group">
 					<div class="col-xs-5">
-						<input type="submit" class="btn btn-success btn-lg" value="Submit" ng-disabled="form_item.$invalid"/>
+						<input type="submit" class="btn btn-success btn-lg" value="Next" ng-disabled="form_item.$invalid"/>
 			    	</div>
 			    </div>
 

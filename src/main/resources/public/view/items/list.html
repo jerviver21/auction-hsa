@@ -21,9 +21,14 @@
 				<td><span ng-bind="item.description"></span></td>
 				<td><span ng-bind="item.auctionEnd"></span></td>
 				<td>{{item.initialPrice | currency:"$"}}</span></td>
-				<td><a ng-href="#/item_edit/{{item.id}}">
+				<td>
+					<a ng-href="#/item_edit/{{item.id}}">
 						<span class="glyphicon glyphicon-pencil"></span>
-					</a></td>							
+					</a>
+
+					<span class="glyphicon glyphicon-trash" ng-click="ctrl.remove(item)"></span>
+
+				</td>							
 			</tr>
 		</tbody>
 	</table>

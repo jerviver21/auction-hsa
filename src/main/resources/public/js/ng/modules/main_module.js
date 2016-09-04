@@ -1,4 +1,4 @@
-var app = angular.module("auctionhsa", ["ngRoute", "auctionhsa.services", "auctionhsa.controllers"]);
+var app = angular.module("auctionhsa", ["ngRoute", "auctionhsa.services", "auctionhsa.controllers", "auctionhsa.commons"]);
 
 app.config(function($routeProvider) {
     $routeProvider
@@ -10,5 +10,8 @@ app.config(function($routeProvider) {
     })
     .when("/item_edit", {
         templateUrl : "/view/items/edit.html",
+    })
+    .when("/item_edit_image", {
+        templateUrl : "/view/items/edit_images.html",
     });
 });

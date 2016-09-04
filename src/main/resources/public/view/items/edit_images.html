@@ -1,0 +1,23 @@
+<div class="panel panel-default"  ng-controller="ItemCtrl as ctrl">
+
+	<div class="panel-heading">Item Data Images</div>
+
+	
+	
+	<div class="panel-body form-auction1" >
+		
+		<div 	class="alert alert-warning" 
+				role="alert"
+				ng-show="ctrl.errorMessage" >
+				{{ctrl.errorMessage}}
+		</div>
+
+			load images for item is being built in this moment....
+			
+			--{{ctrl.item.id}}--
+			
+			<input type="file" file-model="ctrl.file" class="form-control"/>
+			<br/><br/>
+    		<button ng-click="ctrl.uploadFile()"  class="btn btn-success btn-lg">upload me</button>
+	</div>
+</div>

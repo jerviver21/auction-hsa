@@ -56,16 +56,10 @@ public class ItemController {
 		return itemResp;
 	}
 	
-	@RequestMapping(value="/items", method=RequestMethod.DELETE)
-	public boolean removeIem(Long id){
-		boolean success = false;
-		try{
-			itemDAO.remove(itemDAO.findById(id));
-			success = true;
-		}catch(Exception e2){
-			e2.printStackTrace();
-		}
-		return success;
+	@RequestMapping(value="/items/{id}", method=RequestMethod.DELETE)
+	public boolean removeIem(@PathVariable Long id){
+		itemDAO.remove(itemDAO.findById(id));
+		return true;
 	}
 	
 	
