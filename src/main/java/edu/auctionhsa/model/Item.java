@@ -161,11 +161,11 @@ public class Item implements Serializable {
         this.audUsrModified = audUsrModified;
     }
 
-    public Collection<Image> getImagesCollection() {
+    public Set<Image> getImages() {
         return images;
     }
 
-    public void setImagesCollection(Set<Image> imagesCollection) {
+    public void setImages(Set<Image> imagesCollection) {
         this.images = imagesCollection;
     }
 

@@ -1,8 +1,8 @@
 package edu.auctionhsa.controller;
 
+import java.io.IOException;
 import java.util.List;
 
-import javax.persistence.NoResultException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import edu.auctionhsa.dao.ItemDAO;
 import edu.auctionhsa.model.Item;
@@ -25,26 +27,15 @@ public class ItemController {
 	
 	@RequestMapping(value="/items", method=RequestMethod.GET)
 	public List<Item> getItems(){
-		List<Item> items = null;
-		try{
-			String usr = "jerviver21";//Mientras implementamos seguridad de usuarios
-			items = itemDAO.findByUser(usr);
-		}catch(Exception e2){
-			e2.printStackTrace();
-		}
+		String usr = "jerviver21";//Mientras implementamos seguridad de usuarios
+		List<Item> items = itemDAO.findByUser(usr);
 		return items;
 	}
 	
 	@RequestMapping(value="/items/{id}", method=RequestMethod.GET)
 	public Item getItem(@PathVariable Long id){
 		Item item = null;
-		try{
-			item = itemDAO.findById(id);
-		}catch(NoResultException e1){
-			System.out.println("El item no existe");
-		}catch(Exception e2){
-			e2.printStackTrace();
-		}
+		item = itemDAO.findById(id);
 		return item;
 	}
 	
@@ -60,6 +51,12 @@ public class ItemController {
 	public boolean removeIem(@PathVariable Long id){
 		itemDAO.remove(itemDAO.findById(id));
 		return true;
+	}
+	
+	@RequestMapping(value="/items/image/upload", method=RequestMethod.POST)
+	public Item updateImage(MultipartFile file, @RequestParam(value = "params", required = false) Long id)throws IOException{
+		Item item = itemDAO.saveImage(id, file);
+		return item;
 	}
 	
 	

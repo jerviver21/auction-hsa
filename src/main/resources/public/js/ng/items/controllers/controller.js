@@ -19,7 +19,7 @@ function($location, $routeParams,  Item, popupService, fileUpload) {
 	    function(resp, headers){
 		  self.item.id = resp.id;
 		  //popupService.showAlert("Success","The item was sucessfully saved!!");
-		  $location.path("/item_edit_image");
+		  $location.path("/item_edit_image/"+self.item.id);
 	    },
 	    function(err){
 	      self.errorMessage = "Saving process failed!! "+err;
@@ -49,15 +49,13 @@ function($location, $routeParams,  Item, popupService, fileUpload) {
 		console.log('file is ' );
         console.dir(self.file);
         var uploadUrl = "/items/image/upload";
-        fileUpload.uploadFileToUrl(self.file, uploadUrl, 5432).then(
-        		function(data){
-        			console.log('Cargado');
-        			console.log(data);
-        		},
-        		function(err){
-        			console.log('Error, no cargado');
-        			console.log(err);
-        		}
+        fileUpload.uploadFileToUrl(self.file, uploadUrl, self.item.id).then(
+    		function(data){
+    			console.log(data);
+    		},
+    		function(err){
+    			popupService.showAlert("Error", err.data.message);
+    		}
         );
 		
 	}

@@ -11,7 +11,7 @@ app.config(function($routeProvider) {
     .when("/item_edit", {
         templateUrl : "/view/items/edit.html",
     })
-    .when("/item_edit_image", {
+    .when("/item_edit_image/:item_id", {
         templateUrl : "/view/items/edit_images.html",
     });
 });
