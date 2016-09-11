@@ -33,3 +33,15 @@ a,a:visited{
   font-size: 12px;
 }
 
+.panel-left{
+	float: left !important;
+}
+
+.panel-right{
+	float: right !important;
+}
+
+.panel-item-images{
+	padding: 15px;
+	padding-left: 100px;
+}

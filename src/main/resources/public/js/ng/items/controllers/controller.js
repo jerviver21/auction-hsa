@@ -3,11 +3,15 @@ module.controller("ItemCtrl", ['$location', '$routeParams', "Item", "popupServic
 function($location, $routeParams,  Item, popupService, fileUpload) {
 	var self = this;
 	self.item = new Item();
+	self.currentImage = 0;
 	
 	self.edit = function(item_id){
 		Item.get({id:item_id}, function(data) {
 			data.auctionEnd = new Date(data.auctionEnd);
 			self.item = data;
+			if(self.item.images != null && self.item.images.length > 0){
+				self.item.images[self.currentImage].selected = true;
+			}
 		}, function(err) {
 			self.errorMessage = "Reading process failed!! "+err;
 			popupService.showAlert("Error", err.data.message);
@@ -45,11 +49,21 @@ function($location, $routeParams,  Item, popupService, fileUpload) {
 		});
 	}
 	
-	self.uploadFile = function(){
+	
+	//Process of images
+	self.loadImages = function(){
+		popupService.showFormDialog("/view/items/dialogs/load_image.tmpl.html", self).then(
+		function(object) {
+			self.uploadFile(object.file);
+		}, function() {
+	    });
+	}
+	
+	self.uploadFile = function(file){
 		console.log('file is ' );
-        console.dir(self.file);
+        console.dir(file);
         var uploadUrl = "/items/image/upload";
-        fileUpload.uploadFileToUrl(self.file, uploadUrl, self.item.id).then(
+        fileUpload.uploadFileToUrl(file, uploadUrl, self.item.id).then(
     		function(data){
     			console.log(data);
     		},
@@ -59,6 +73,24 @@ function($location, $routeParams,  Item, popupService, fileUpload) {
         );
 		
 	}
+	
+	self.previousImage = function(){
+		if(self.currentImage > 0){
+			self.item.images[self.currentImage].selected = false;
+			self.currentImage = self.currentImage - 1;
+			self.item.images[self.currentImage].selected = true;
+		}
+	}
+	
+	
+	self.nextImage = function(){
+		if(self.item.images != null && self.currentImage < (self.item.images.length - 1) ){
+			self.item.images[self.currentImage].selected = false;
+			self.currentImage = self.currentImage  + 1;
+			self.item.images[self.currentImage].selected = true;
+		}
+	}
+
 	
 	//Load the init data.
 	if($routeParams.item_id){

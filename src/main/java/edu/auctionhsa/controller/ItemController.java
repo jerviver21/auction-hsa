@@ -35,7 +35,7 @@ public class ItemController {
 	@RequestMapping(value="/items/{id}", method=RequestMethod.GET)
 	public Item getItem(@PathVariable Long id){
 		Item item = null;
-		item = itemDAO.findById(id);
+		item = itemDAO.findEagerly(id);
 		return item;
 	}
 	

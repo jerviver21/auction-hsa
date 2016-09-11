@@ -27,8 +27,6 @@ import javax.validation.constraints.Size;
 @Embeddable
 public class Image implements Serializable {
 
-	@NotNull
-    private Long id;
     
     @NotNull
     @Size(min = 1, max = 1024)
@@ -41,13 +39,6 @@ public class Image implements Serializable {
     public Image() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getPath() {
         return path;
@@ -68,7 +59,7 @@ public class Image implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (path != null ? path.hashCode() : 0);
         return hash;
     }
 
@@ -79,7 +70,7 @@ public class Image implements Serializable {
             return false;
         }
         Image other = (Image) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.path == null && other.path != null) || (this.path != null && !this.path.equals(other.path))) {
             return false;
         }
         return true;
@@ -87,7 +78,7 @@ public class Image implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Images[ id=" + id + " ]";
+        return "model.Images[ id=" + path + " ]";
     }
     
 }

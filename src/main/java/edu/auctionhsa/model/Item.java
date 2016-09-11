@@ -46,7 +46,7 @@ public class Item implements Serializable {
     
     @NotNull
     @Version
-    protected long version;
+	private long version;
     
     @NotNull
     @Size(min = 1, max = 64)
@@ -218,6 +218,14 @@ public class Item implements Serializable {
     public String toString() {
         return "model.Items[ id=" + id + " ]";
     }
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
+	}
 
 	
 

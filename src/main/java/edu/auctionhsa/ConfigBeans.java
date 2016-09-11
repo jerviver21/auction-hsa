@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,7 +15,7 @@ import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
 
 
 @SpringBootApplication
-public class ConfigBeans {
+public class ConfigBeans{
 	
 	/*
  		Este bean de configuración PERSONALIZA el mapeo entre objetos y json que realiza Spring MVC.
@@ -45,5 +47,7 @@ public class ConfigBeans {
    
         return converter;
     } 
+	
+	
 
 }

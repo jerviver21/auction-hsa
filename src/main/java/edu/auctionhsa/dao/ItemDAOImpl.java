@@ -1,10 +1,10 @@
 package edu.auctionhsa.dao;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Set;
+
+import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -48,11 +48,20 @@ public class ItemDAOImpl extends GenericDAOImpl<Item, Long> implements ItemDAO {
 	public Item saveImage(Long id, MultipartFile io)throws IOException {
 		Item item = em.getReference(Item.class, id);
 		Set<Image> images = item.getImages();
-		String path = new FileManager().saveFile("img_"+id+"_"+(images.size()+1), io);
+		String fullpath = new FileManager().saveFile(Constants.PATH_ITEMS_IMAGES, "img_"+id+"_"+(images.size()+1), io);
 		Image image = new Image();
-		image.setPath(path);
+		image.setPath(Constants.RELATIVE_ITEMS_IMAGES+fullpath.replaceAll(".*/(.*)", "$1"));
 		images.add(image);
 		em.merge(item);
+		return item;
+	}
+	
+	public Item findEagerly(Long id){
+		TypedQuery<Item> query = em.createQuery("SELECT i FROM Item i WHERE i.id =:id", Item.class).setParameter("id", id);
+		Item item = query.getSingleResult();
+		item.getImages().size();
+		item.getBidsCollection().size();
+		item.getSeller().getUsr();
 		return item;
 	}
 	

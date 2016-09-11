@@ -16,4 +16,6 @@ public interface ItemDAO extends GenericDAO<Item, Long> {
 	
 	public Item saveImage(Long id, MultipartFile file)throws IOException;
 
+	public Item findEagerly(Long id);
+
 }
