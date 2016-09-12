@@ -1,6 +1,6 @@
 var module = angular.module("auctionhsa.controllers");
-module.controller("ItemCtrl", ['$location', '$routeParams', "Item", "popupService", "fileUpload", 
-function($location, $routeParams,  Item, popupService, fileUpload) {
+module.controller("ItemCtrl", ['$location', '$routeParams', "Item", "popupService", "fileUploadService", 
+function($location, $routeParams,  Item, popupService, fileUploadService) {
 	var self = this;
 	self.item = new Item();
 	self.currentImage = 0;
@@ -22,7 +22,6 @@ function($location, $routeParams,  Item, popupService, fileUpload) {
 	  Item.save(self.item,
 	    function(resp, headers){
 		  self.item.id = resp.id;
-		  //popupService.showAlert("Success","The item was sucessfully saved!!");
 		  $location.path("/item_edit_image/"+self.item.id);
 	    },
 	    function(err){
@@ -52,26 +51,21 @@ function($location, $routeParams,  Item, popupService, fileUpload) {
 	
 	//Process of images
 	self.loadImages = function(){
-		popupService.showFormDialog("/view/items/dialogs/load_image.tmpl.html", self).then(
+		popupService.showFormDialog("/view/items/dialogs/load_image.tmpl.html").then(
 		function(object) {
-			self.uploadFile(object.file);
+			var uploadUrl = "/items/image/upload";
+			fileUploadService.uploadFileToUrl(object.file, uploadUrl, self.item.id).then(
+	    		function(res){
+	    			self.item = res.data;
+	    			self.currentImage = self.item.images.length -1;
+	    			self.item.images[self.currentImage].selected = true;
+	    		},
+	    		function(err){
+	    			popupService.showAlert("Error", err.data.message);
+	    		}
+	        );
 		}, function() {
 	    });
-	}
-	
-	self.uploadFile = function(file){
-		console.log('file is ' );
-        console.dir(file);
-        var uploadUrl = "/items/image/upload";
-        fileUpload.uploadFileToUrl(file, uploadUrl, self.item.id).then(
-    		function(data){
-    			console.log(data);
-    		},
-    		function(err){
-    			popupService.showAlert("Error", err.data.message);
-    		}
-        );
-		
 	}
 	
 	self.previousImage = function(){

@@ -35,6 +35,8 @@ public class Image implements Serializable {
     @Size(max = 64)
     private String audUsrModified = "DEFAULT";
     
+    private Boolean selected = false;
+    
 
     public Image() {
     }
@@ -80,5 +82,15 @@ public class Image implements Serializable {
     public String toString() {
         return "model.Images[ id=" + path + " ]";
     }
+
+
+	public Boolean getSelected() {
+		return selected;
+	}
+
+
+	public void setSelected(Boolean selected) {
+		this.selected = selected;
+	}
     
 }

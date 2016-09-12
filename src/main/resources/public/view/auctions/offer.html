@@ -1,0 +1,41 @@
+<div class="panel panel-default"  ng-controller="AuctionCtrl as ctrl">
+
+	<md-button class="md-primary md-raised" ng-click="ctrl.makeOffer()">
+      Make an Offer
+    </md-button>
+    
+    <br/>
+    <br/>
+	
+	<div class="panel-body form-auction1" >
+	
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><span>Product: </span></td>
+					<td><span ng-bind="ctrl.auction.name"></span></td>						
+				</tr>
+				<tr>
+					<td><span>Description: </span></td>
+					<td><span ng-bind="ctrl.auction.description"></span></td>						
+				</tr>
+				<tr>
+					<td><span>Max Bid: </span></td>
+					<td><span>{{ctrl.auction.maxBidAmount | currency:"$"}}</span></td>						
+				</tr>	
+			</tbody>
+		</table>
+
+		<div class="container" ng-show="ctrl.auction.images.length">
+			<div class="row">
+				<md-button type="button" class="md-primary md-raised col-lg-1" ng-click="ctrl.previousImage()"> Previos </md-button>
+				
+				<md-button type="button" class="md-primary md-raised col-lg-1" ng-click="ctrl.nextImage()"> Next </md-button>
+			</div>
+			<div ng-repeat="image in ctrl.auction.images" class="row">
+				<img ng-src="{{image.path}}" class="img-rounded col-lg-4" height="250px" width="250px" ng-show="image.selected">						
+			</div>
+		</div>
+		
+	</div>
+</div>

@@ -1,0 +1,32 @@
+<div class="container theme-showcase" role="main"  ng-controller="UsrCtrl as ctrl">
+	
+	<table class="table">
+		<thead>
+               <tr>
+                   <th scope="col">Name</th>
+                   <th scope="col">Num Id</th>
+                   <th scope="col">User</th>
+                   <th scope="col">City</th>
+                   <th scope="col">Actions</th>
+               </tr>
+           </thead>
+	
+		<tbody>
+			<tr ng-repeat="user in ctrl.users">
+				<td><span ng-bind="user.name"></span></td>
+				<td><span ng-bind="user.numId"></span></td>
+				<td><span ng-bind="user.usr"></span></td>
+				<td><span ng-bind="user.city.name"></span></td>
+				<td>
+					<a ng-href="#/user_edit/{{user.id}}">
+						<span class="glyphicon glyphicon-pencil"></span>
+					</a>
+
+					<span class="glyphicon glyphicon-trash" ng-click="ctrl.remove(user)"></span>
+
+				</td>							
+			</tr>
+		</tbody>
+	</table>
+
+</div>

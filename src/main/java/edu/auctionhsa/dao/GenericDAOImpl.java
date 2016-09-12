@@ -66,6 +66,7 @@ public abstract class GenericDAOImpl<T, ID extends Serializable> implements Gene
 
     @Override
     public void checkVersion(T entity) {
+    	entity = em.merge(entity);
         em.lock(entity, OPTIMISTIC_FORCE_INCREMENT );
     }
 

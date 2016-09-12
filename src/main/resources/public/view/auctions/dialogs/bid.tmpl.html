@@ -1,0 +1,30 @@
+
+<md-dialog aria-label="Make a Bid">
+
+	<form ng-cloak name="form_bid">
+	    <md-toolbar>
+	      <div class="md-toolbar-tools">
+	        <h2>Which is your Bid?</h2>
+	        <span flex></span>
+	        <md-button class="md-icon-button" ng-click="cancel()">
+	          <md-icon md-svg-src="../images/icons/ic_clear_black_24px.svg" aria-label="Close dialog"></md-icon>
+	        </md-button>
+	      </div>
+	    </md-toolbar>
+	
+	    <md-input-container class="md-block">
+		  <label>Bid Amount</label>
+		  <input required  name="amount" ng-model="object.amount">
+		  <div ng-messages="form_bid.amount.$error">
+		    <div ng-message="required">This is required.</div>
+		  </div>
+		</md-input-container>
+	
+	    <md-dialog-actions layout="row">
+	      <md-button ng-click="answer()">
+	        Place bid
+	      </md-button>
+	    </md-dialog-actions>
+	</form>
+
+</md-dialog>

@@ -46,12 +46,12 @@ public class Bid implements Serializable, Comparable<Bid>{
 
     @JsonIgnore
     @JoinColumn(name = "id_item", referencedColumnName = "id")
-    @ManyToOne(optional =false, fetch = FetchType.LAZY, cascade= CascadeType.MERGE)
+    @ManyToOne(optional =false, fetch = FetchType.LAZY)
     private Item item;
     
     @JsonIgnore
     @JoinColumn(name = "id_user", referencedColumnName = "id")
-    @ManyToOne(optional =false, fetch = FetchType.LAZY, cascade= CascadeType.MERGE)
+    @ManyToOne(optional =false, fetch = FetchType.LAZY)
     private User user;
     
 

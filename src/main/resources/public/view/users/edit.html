@@ -1,0 +1,88 @@
+<div class="panel panel-default"  ng-controller="UsrCtrl as ctrl">
+
+	<div class="panel-heading">User Data</div>
+
+	
+	
+	<div class="panel-body form-auction1" >
+		<md-content layout-padding>
+			<form ng-submit="ctrl.save()" name="form_usr">
+				
+				<input name="id" type="hidden" ng-model="ctrl.user.id"/>
+				
+				<md-input-container class="md-block">
+				  <label>Name</label>
+				  <input  name="name" ng-model="ctrl.user.name">
+				</md-input-container>
+				
+				<md-input-container class="md-block">
+				  <label>Num Id</label>
+				  <input  name="num_id" ng-model="ctrl.user.numId">
+				</md-input-container>
+				
+				<md-input-container class="md-block">
+		          <label>Region</label>
+		          <md-select ng-model="ctrl.idRegion" ng-change="ctrl.getCities()">
+		            <md-option><em>None</em></md-option>
+		            <md-option ng-repeat="region in ctrl.regions" ng-value="region.id">
+		              {{region.name}}
+		            </md-option>
+		          </md-select>
+		        </md-input-container>
+		        
+		        <md-input-container class="md-block">
+		          <label>City</label>
+		          <md-select ng-model="ctrl.user.city.id">
+		            <md-option><em>None</em></md-option>
+		            <md-option ng-repeat="city in ctrl.cities" ng-value="city.id">
+		              {{city.name}}
+		            </md-option>
+		          </md-select>
+		        </md-input-container>
+		        
+		        <md-input-container class="md-block">
+				  <label>Street</label>
+				  <input  name="name" ng-model="ctrl.user.address.addressStreet">
+				</md-input-container>
+				
+				<md-input-container class="md-block">
+				  <label>Number</label>
+				  <input  name="number" ng-model="ctrl.user.address.addressNumber">
+				</md-input-container>
+				
+				<md-input-container class="md-block">
+				  <label>Other Address Info</label>
+				  <input  name="ur" ng-model="ctrl.user.address.addressResidentialUnit">
+				</md-input-container>
+		        
+		        <md-input-container>
+					<md-checkbox ng-model="ctrl.user.isUsrPremium">Is User Premium?</md-checkbox>
+				</md-input-container>
+				
+				<md-input-container class="md-block">
+				  <label>User</label>
+				  <input required  name="usr" ng-model="ctrl.user.usr">
+				  <div ng-messages="form_usr.usr.$error">
+				    <div ng-message="required">This is required.</div>
+				  </div>
+				</md-input-container>
+				
+				<md-input-container class="md-block">
+				  <label>Password</label>
+				  <input required  name="pwd" type="password" ng-model="ctrl.user.pwd">
+				  <div ng-messages="form_usr.pwd.$error">
+				    <div ng-message="required">This is required.</div>
+				  </div>
+				</md-input-container>
+			
+				
+				<div class="form-group">
+					<div class="col-xs-5">
+						<input type="submit" class="btn btn-success btn-lg" value="Next" ng-disabled="form_usr.$invalid"/>
+			    	</div>
+			    </div>
+
+			</form>
+		</md-content>
+	</div>
+</div>

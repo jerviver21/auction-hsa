@@ -15,17 +15,18 @@
 				{{ctrl.errorMessage}}
 		</div>
 		
-		<div class="container">
+		<div class="container" ng-show="ctrl.item.images.length">
 			<div class="row">
 				<md-button type="button" class="md-primary md-raised col-lg-2" ng-click="ctrl.previousImage()"> Previos </md-button>
 				
 				<md-button type="button" class="md-primary md-raised col-lg-2" ng-click="ctrl.nextImage()"> Next </md-button>
 			</div>
+			<div ng-repeat="image in ctrl.item.images" class="row">
+				<img ng-src="{{image.path}}" class="img-rounded" height="420px" width="420px" ng-show="image.selected">						
+			</div>
 		</div>
 	
-		<div ng-repeat="image in ctrl.item.images">
-			<img ng-src="{{image.path}}" class="img-rounded" height="420px" width="420px" ng-show="image.selected">						
-		</div>
+		
 		
 		
 

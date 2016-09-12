@@ -1,5 +1,5 @@
 angular.module('auctionhsa.commons')
-	.service('fileUpload', ['$http', function ($http) {
+	.service('fileUploadService', ['$http', function ($http) {
     this.uploadFileToUrl = function(file, uploadUrl, params){
         var fd = new FormData();
         fd.append('file', file);
