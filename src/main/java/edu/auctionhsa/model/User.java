@@ -53,7 +53,7 @@ public class User implements Serializable {
     private String pwd;
     
     @JoinColumn(name = "id_divipola", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Divipola city;
     
     @Embedded
@@ -132,11 +132,11 @@ public class User implements Serializable {
     }
 
 
-    public Divipola getIdDivipola() {
+    public Divipola getCity() {
         return city;
     }
 
-    public void setIdDivipola(Divipola idDivipola) {
+    public void setCity(Divipola idDivipola) {
         this.city = idDivipola;
     }
 
