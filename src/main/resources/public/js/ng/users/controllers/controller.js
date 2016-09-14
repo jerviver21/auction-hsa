@@ -8,6 +8,10 @@ function($location, $routeParams,  User, popupService, Common) {
 	self.edit = function(id){
 		User.get({id:id}, function(data) {
 			self.user = data;
+			if(self.user.city){
+				self.idRegion = self.user.city.region.id;
+				self.getCities();
+			}
 		}, function(err) {
 			self.errorMessage = "Reading process failed!! "+err;
 			popupService.showAlert("Error", err.data.message);
@@ -49,7 +53,7 @@ function($location, $routeParams,  User, popupService, Common) {
 	
 	//Load the init data.
 	if($routeParams.id){
-		self.edit($routeParams.id);
+		self.edit($routeParams.id);	
 	}else{
 		self.users = User.query();
 	}

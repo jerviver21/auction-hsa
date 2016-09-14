@@ -32,8 +32,8 @@ public class Divipola implements Serializable {
     private String name;
     
     @JoinColumn(name = "id_divipola", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Divipola department;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Divipola region;
 
     public Divipola() {
     }
@@ -63,12 +63,12 @@ public class Divipola implements Serializable {
         this.name = name;
     }
 
-    public Divipola getIdDivipola() {
-        return department;
+    public Divipola getRegion() {
+        return region;
     }
 
-    public void setIdDivipola(Divipola idDivipola) {
-        this.department = idDivipola;
+    public void setRegion(Divipola idDivipola) {
+        this.region = idDivipola;
     }
 
     @Override

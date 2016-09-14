@@ -53,7 +53,7 @@ public class User implements Serializable {
     private String pwd;
     
     @JoinColumn(name = "id_divipola", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Divipola city;
     
     @Embedded

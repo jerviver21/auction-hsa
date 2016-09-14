@@ -19,11 +19,11 @@ public class CommonDAOImpl implements CommonDAO {
     protected EntityManager em;
 	
 	public List<Divipola> getRegions(){
-		return em.createQuery("SELECT d FROM Divipola d WHERE d.department is null").getResultList();
+		return em.createQuery("SELECT d FROM Divipola d WHERE d.region is null").getResultList();
 	}
 	
 	public List<Divipola> getCities(Integer idRegion){
-		return em.createQuery("SELECT d FROM Divipola d WHERE d.department.id =:idRegion")
+		return em.createQuery("SELECT d FROM Divipola d WHERE d.region.id =:idRegion")
 				.setParameter("idRegion",idRegion).getResultList();
 	}
 
