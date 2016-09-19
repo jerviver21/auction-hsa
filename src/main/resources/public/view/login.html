@@ -1,0 +1,14 @@
+<div class="panel panel-default"  ng-controller="LoginCtrl as ctrl">
+
+	<div class="panel-heading">User Data</div>
+	
+	<div class="container" ng-show="!ctrl.authenticated">
+		Login with: <a href="/login">Facebook</a>
+	</div>
+	<div class="container" ng-show="ctrl.authenticated">
+		Logged in as: <span ng-bind="home.user"></span>
+	</div>
+	
+	
+	
+</div>

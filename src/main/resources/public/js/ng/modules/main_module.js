@@ -29,5 +29,8 @@ app.config(function($routeProvider) {
     .when("/user_list", {
         templateUrl : "/view/users/list.html",
     })
+    .when("/login", {
+        templateUrl : "/view/login.html",
+    })
     ;
 });

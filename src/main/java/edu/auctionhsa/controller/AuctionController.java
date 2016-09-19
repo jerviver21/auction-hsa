@@ -16,7 +16,6 @@ import edu.auctionhsa.dao.BidDAO;
 import edu.auctionhsa.dao.ItemDAO;
 import edu.auctionhsa.model.Bid;
 import edu.auctionhsa.model.Item;
-import edu.auctionhsa.model.User;
 
 @RestController
 public class AuctionController {

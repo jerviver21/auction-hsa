@@ -75,7 +75,7 @@ public class Item implements Serializable {
     @ElementCollection
 	@CollectionTable(name="images", joinColumns=@JoinColumn(name="id_item"))
     @Embedded
-    private Set<Image> images = new HashSet<>();
+    private Set<Image> images = new HashSet<>(); 
     
     @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
     private Set<Bid> bids = new TreeSet<>();
