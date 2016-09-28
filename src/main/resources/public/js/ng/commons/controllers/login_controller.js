@@ -1,8 +1,8 @@
 var module = angular.module("auctionhsa.controllers");
-module.controller("LoginCtrl", ['$http',  function($http) {
+module.controller("LoginCtrl", ['LoginService',  function(LoginService) {
 	var self = this;
 	
-	$http.get("/user").success(function(data) {
+	LoginService.getPrincipal().success(function(data) {
       self.user = data.userAuthentication.details.name;
       self.authenticated = true;
     }).error(function() {
