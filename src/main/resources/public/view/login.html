@@ -1,14 +1,30 @@
-<div class="panel panel-default"  ng-controller="LoginCtrl as ctrl">
 
-	<div class="panel-heading">User Data</div>
+
+
+<div  ng-controller="MainCtrl as ctrl">
+
+
+	<div class="container">
 	
-	<div class="container" ng-show="!ctrl.authenticated">
-		Login with: <a href="/login">Facebook</a>
+		<div class="row">
+			<div class="col-lg-3 col-centered" >
+				<h3 ng-show="!ctrl.isAuthenticated()">Login with:</h3>
+				<h3 ng-show="ctrl.isAuthenticated()">Logged in as:</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3 col-centered" >
+				<div  ng-show="!ctrl.isAuthenticated()">
+					<a href="/login">
+						<img alt="Facebook" src="../images/facebook.png">
+					</a>
+				</div>
+				<span ng-bind="ctrl.getUserName()"   ng-show="ctrl.isAuthenticated()"></span>
+			</div>
+		</div>
 	</div>
-	<div class="container" ng-show="ctrl.authenticated">
-		Logged in as: <span ng-bind="home.user"></span>
-	</div>
-	
+		
+
 	
 	
 </div>

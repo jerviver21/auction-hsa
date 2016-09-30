@@ -45,3 +45,9 @@ a,a:visited{
 	padding: 15px;
 	padding-left: 100px;
 }
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+    text-align: center;
+}
