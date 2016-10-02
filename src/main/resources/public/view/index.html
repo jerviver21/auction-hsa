@@ -34,7 +34,7 @@
 						<a href="#/login">Login</a>
 					</span>
 					<span ng-show="ctrl.isAuthenticated()">
-						<a href="/logout">Logout</a>
+						<span ng-click="ctrl.logout()" style="color:white;">Logout</span>
 					</span>
 				</div>
 		    </nav>
@@ -60,7 +60,7 @@
 		<script src="../js/ng/modules/services_module.js"></script>
 		<script src="../js/ng/modules/controllers_module.js"></script>
 		<script src="../js/ng/modules/common_module.js"></script>
-		<script src="../js/ng/modules/main_module.js"></script>
+		
 		<script src="../js/ng/commons/directives/file_model.js"></script>
 		<script src="../js/ng/commons/services/fileupload_service.js"></script>
 		<script src="../js/ng/commons/services/popup_service.js"></script>
@@ -73,6 +73,7 @@
 		<script src="../js/ng/commons/services/common_service.js"></script>
 		<script src="../js/ng/users/services/service.js"></script>
 		<script src="../js/ng/users/controllers/controller.js"></script>
+		<script src="../js/ng/modules/main_module.js"></script>
 		
 		
 

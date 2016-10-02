@@ -21,8 +21,27 @@ import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilt
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.filter.CompositeFilter;
 
+
+/**
+ * Oauth2 es una especificación estándar que permite implementar la seguridad de servicios REST a través de un token, esta especificación 
+ * ha sido adoptada por todos o la gran mayoría de los gigantes tecnológicos.
+ * Tiene 3 actores el cliente, el recurso y el servidor de autorización. en el que basicamente el servidor de autorización dará un token al cliente para que acceda al recurso
+ * Flujo:
+ * Recurso:  (/oauth/autorize) GET  user-authorization-uri (cliente-id, redirect-url)
+ *                                                                                                    Auth Server: retorna un code y un state
+ * Recurso:  (oauth/token) POST access-token-uri (client-id, client-secret, code, state, redirect-url)
+ *                                                                                                    Auth Server: retorna el token
+ * Una vez el recurso obtiene el access token, puede consultar un API en el authorization server, pasando como parametro el token.
+ * Un scope (oauth2) define que tipo de recursos puede consultar en el api
+ * 
+ * Por ahora se trabajará solamente clientes github y facebook, quedará pendiente implementar el authorization server, para que autorice después de
+ * proveidas las credenciales.
+ * 
+ * doc: http://projects.spring.io/spring-security-oauth/docs/oauth2.html
+ */
 
 @SpringBootApplication
 @EnableOAuth2Client
@@ -54,7 +73,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	    		"/auctions/*",
 	    		"/").permitAll()
 	    .anyRequest().authenticated()
-	    .and().logout().logoutSuccessUrl("/").permitAll();;
+	    .and().logout().logoutSuccessUrl("/").permitAll().and().csrf()
+		.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());;
 	}
 	
 	
@@ -112,8 +132,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	  registration.setOrder(-100);
 	  return registration;
 	}
-
-	
 	
 
 }

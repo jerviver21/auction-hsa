@@ -18,9 +18,9 @@
 				<td><span ng-bind="item.auctionEnd"></span></td>
 				<td>{{item.maxBidAmount | currency:"$"}}</span></td>
 				<td>
-					<a ng-href="#/auction_edit/{{item.id}}">
+					<span ng-click = "ctrl.goOfferView(item.id)">
 						make an offer!
-					</a>
+					</span>
 				</td>							
 			</tr>
 		</tbody>

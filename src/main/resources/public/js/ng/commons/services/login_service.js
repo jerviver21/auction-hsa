@@ -1,24 +1,24 @@
 var module = angular.module("auctionhsa.services");
 
-module.factory("LoginService", ["$http", function($http) {
+module.factory("LoginService", ["$http", "$location", function($http, $location) {
 	user = null;
 	isLoggedIn = false;
 	
 	return {
 		checkAuth : function(){
-			$http.get("/user").then(function(data){
+			return $http.get("/user").success(function(data){
 				isLoggedIn =true;
+				console.log(data);
 				user = data.userAuthentication.details.name;
-			}, function(error){
-				console.log('Its not authenticated!!');
-				user = null;
-				isLoggedIn = false;
 			});
 		},
 		
 		logout : function(){
-			isLoggedIn =false;
-			user = null;
+			return $http.post('/logout', {}).success(function() {
+				isLoggedIn =false;
+				user = null;
+				$location.path("/");
+			});
 		},
 		
 		isAuthenticated : function(){

@@ -1,6 +1,6 @@
 var module = angular.module("auctionhsa.controllers");
-module.controller("AuctionCtrl", ['$location', '$routeParams', "Auction", "popupService", 
-function($location, $routeParams,  Auction, popupService) {
+module.controller("AuctionCtrl", ['$location', '$routeParams', "Auction", "popupService", "LoginService",
+function($location, $routeParams,  Auction, popupService, LoginService) {
 	var self = this;
 	self.auction = new Auction();
 	self.currentImage = 0;
@@ -35,6 +35,16 @@ function($location, $routeParams,  Auction, popupService) {
 	    });
 	}
 	
+	//Navigation
+	self.goOfferView = function(id){
+		
+		if(LoginService.isAuthenticated()){
+			$location.path("/auction_edit/"+id);
+		}else{
+			$location.path("/login");
+		}
+	}
+	
 	
 	//Control over images
 	self.previousImage = function(){
@@ -53,6 +63,8 @@ function($location, $routeParams,  Auction, popupService) {
 			self.auction.images[self.currentImage].selected = true;
 		}
 	}
+	
+	
 
 	
 	//Load the init data.
