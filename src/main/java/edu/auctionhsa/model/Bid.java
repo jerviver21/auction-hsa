@@ -42,14 +42,14 @@ public class Bid implements Serializable, Comparable<Bid>{
     
     @Column(updatable=false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createOn;
+    private Date createOn = new Date();
 
     @JsonIgnore
     @JoinColumn(name = "id_item", referencedColumnName = "id")
     @ManyToOne(optional =false, fetch = FetchType.LAZY)
     private Item item;
     
-    @JsonIgnore
+    //@JsonIgnore
     @JoinColumn(name = "id_user", referencedColumnName = "id")
     @ManyToOne(optional =false, fetch = FetchType.LAZY)
     private User user;

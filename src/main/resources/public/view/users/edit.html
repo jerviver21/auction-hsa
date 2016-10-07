@@ -61,24 +61,15 @@
 				
 				<md-input-container class="md-block">
 				  <label>User</label>
-				  <input required  name="usr" ng-model="ctrl.user.usr">
+				  <input required  name="usr" ng-model="ctrl.user.usr" readonly="true">
 				  <div ng-messages="form_usr.usr.$error">
 				    <div ng-message="required">This is required.</div>
 				  </div>
 				</md-input-container>
-				
-				<md-input-container class="md-block">
-				  <label>Password</label>
-				  <input required  name="pwd" type="password" ng-model="ctrl.user.pwd">
-				  <div ng-messages="form_usr.pwd.$error">
-				    <div ng-message="required">This is required.</div>
-				  </div>
-				</md-input-container>
 			
-				
 				<div class="form-group">
 					<div class="col-xs-5">
-						<input type="submit" class="btn btn-success btn-lg" value="Next" ng-disabled="form_usr.$invalid"/>
+						<input type="submit" class="btn btn-success btn-lg" value="Save" ng-disabled="form_usr.$invalid"/>
 			    	</div>
 			    </div>
 

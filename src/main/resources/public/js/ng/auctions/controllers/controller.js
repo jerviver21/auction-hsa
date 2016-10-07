@@ -23,7 +23,10 @@ function($location, $routeParams,  Auction, popupService, LoginService) {
 		function(object) {
 			Auction.placeBid({amount:object.amount},self.auction,
 			    function(resp, headers){
-				  self.auction= resp;
+				  self.auction.maxBidAmount = resp.maxBidAmount;
+				  if(!resp.user.name){
+					  $location.path("/user_edit/"+resp.user.id);
+				  }
 			    },
 			    function(err){
 			      self.errorMessage = "Saving process failed!! "+err;

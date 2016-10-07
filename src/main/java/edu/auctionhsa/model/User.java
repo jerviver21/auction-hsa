@@ -17,6 +17,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -34,11 +35,9 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotNull
     @Size(min = 1, max = 64)
     private String name;
     
-    @NotNull
     @Size(min = 1, max = 64)
     @Column(unique=true)
     private String numId;
@@ -48,9 +47,6 @@ public class User implements Serializable {
     @Column(unique=true)
     private String usr;
     
-    @NotNull
-    @Size(max = 1024)
-    private String pwd;
     
     @JoinColumn(name = "id_divipola", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.EAGER)
@@ -61,6 +57,7 @@ public class User implements Serializable {
     
     
     private Boolean isUsrPremium;
+    
     
     //Auditory Fields
     @Size(max = 64)
@@ -107,13 +104,6 @@ public class User implements Serializable {
         this.usr = usr;
     }
 
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
 
     public Boolean getIsUsrPremium() {
         return isUsrPremium;
@@ -172,5 +162,6 @@ public class User implements Serializable {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+
     
 }
