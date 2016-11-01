@@ -44,16 +44,11 @@ public class AuctionController {
 		return item;
 	}
 	
-	@Transactional
+	
 	@RequestMapping(value="/auctions/{amount}", method=RequestMethod.POST)
 	public Bid placeBid(@RequestBody @Valid Item item, @PathVariable Long amount, Principal principal)throws InvalidAmountException{
 		System.out.println(item + " - "+amount+" - "+principal.getName() );
-		
-		if (!item.isValidBidAmount(amount)) {
-            throw new InvalidAmountException();
-        }
-        itemDAO.checkVersion(item);
-        Bid bid = bidDAO.save(new Bid(amount, item), principal.getName());
+        Bid bid = bidDAO.save(item, amount, principal.getName());
 		return bid;
 	}
 

@@ -23,9 +23,11 @@ function($location, $routeParams,  Auction, popupService, LoginService) {
 		function(object) {
 			Auction.placeBid({amount:object.amount},self.auction,
 			    function(resp, headers){
-				  self.auction.maxBidAmount = resp.maxBidAmount;
 				  if(!resp.user.name){
 					  $location.path("/user_edit/"+resp.user.id);
+				  }else{
+					  console.log("almacenado");
+					  $location.path("/");
 				  }
 			    },
 			    function(err){
