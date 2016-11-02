@@ -33,6 +33,8 @@ function($location, $routeParams,  Auction, popupService, LoginService) {
 			    function(err){
 			      self.errorMessage = "Saving process failed!! "+err;
 			      popupService.showAlert("Error", err.data.message);
+			      $location.path("/");
+			     
 			    }
 			);
 			
