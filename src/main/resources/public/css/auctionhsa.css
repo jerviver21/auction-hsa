@@ -51,3 +51,8 @@ a,a:visited{
     margin: 0 auto;
     text-align: center;
 }
+
+.pbtn-center{
+	margin : 0 0 40% 40%;
+}
+

@@ -1,11 +1,5 @@
 <div class="panel panel-default"  ng-controller="AuctionCtrl as ctrl">
 
-	<md-button class="md-primary md-raised" ng-click="ctrl.makeOffer()">
-      Make an Offer
-    </md-button>
-    
-    <br/>
-    <br/>
 	
 	<div class="panel-body form-auction1" >
 	
@@ -22,6 +16,13 @@
 				<tr>
 					<td><span>Max Bid: </span></td>
 					<td><span>{{ctrl.auction.maxBidAmount | currency:"$"}}</span></td>						
+				</tr>
+				<tr>
+					<td colspan="2">
+					<md-button md-no-ink class="md-primary pbtn-center" ng-click="ctrl.makeOffer()">
+					Make an Offer
+					</md-button>
+					</td>				
 				</tr>	
 			</tbody>
 		</table>

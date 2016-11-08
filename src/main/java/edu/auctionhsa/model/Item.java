@@ -68,6 +68,7 @@ public class Item implements Serializable {
     @Range(min=0)
     private Long initialPrice = 0L;
     
+    @NotNull
     @JoinColumn(name = "id_user", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private User seller;

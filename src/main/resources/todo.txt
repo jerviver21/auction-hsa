@@ -1,0 +1,10 @@
+Conceptos claros: http://stackoverflow.com/questions/4904096/whats-the-difference-between-unit-functional-acceptance-and-integration-test
+Ejemplos de pruebas es ProyBaseSBAT y hibernateexa1.
+
+Terminadas pruebas de integración.
+
+Pendiente:
+- Pruebas unitarias
+- Configuración para manejar diferentes bases de datos, y diferentes tareas para correr las diferentes pruebas.
+
+
