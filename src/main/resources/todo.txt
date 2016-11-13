@@ -6,5 +6,7 @@ Terminadas pruebas de integración.
 Pendiente:
 - Pruebas unitarias
 - Configuración para manejar diferentes bases de datos, y diferentes tareas para correr las diferentes pruebas.
+- Organización del código de front end y uso total responsive de angular-material
+- Implementación de pruebas jbehave.
 
 

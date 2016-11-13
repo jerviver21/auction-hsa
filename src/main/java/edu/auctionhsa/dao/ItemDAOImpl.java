@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,11 @@ public class ItemDAOImpl extends GenericDAOImpl<Item, Long> implements ItemDAO {
 	
 	public ItemDAOImpl(){
 		super(Item.class);
+	}
+	
+	public ItemDAOImpl(EntityManager em, UserDAO userDAO){
+		super(Item.class, em);
+		this.userDAO = userDAO;
 	}
 	
 	@Override

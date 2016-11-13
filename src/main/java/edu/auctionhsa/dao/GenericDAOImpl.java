@@ -30,6 +30,11 @@ public abstract class GenericDAOImpl<T, ID extends Serializable> implements Gene
     protected GenericDAOImpl(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
+    
+    protected GenericDAOImpl(Class<T> entityClass, EntityManager em) {
+        this.entityClass = entityClass;
+        this.em = em;
+    }
 
     public EntityManager getEntityManager() {
         return em;

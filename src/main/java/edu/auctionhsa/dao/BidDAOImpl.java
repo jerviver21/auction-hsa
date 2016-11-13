@@ -1,5 +1,7 @@
 package edu.auctionhsa.dao;
 
+import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,12 @@ public class BidDAOImpl extends GenericDAOImpl<Bid, Long> implements BidDAO{
 	
 	public BidDAOImpl(){
 		super(Bid.class);
+	}
+	
+	public BidDAOImpl(EntityManager em, UserDAO userDAO, ItemDAO itemDAO){
+		super(Bid.class, em);
+		this.usrDAO = userDAO;
+		this.itemDAO = itemDAO;
 	}
 	
 	@Override 
