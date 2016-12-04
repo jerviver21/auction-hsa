@@ -2,6 +2,7 @@ buildscript {
     repositories {
         mavenCentral()
     }
+
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE")
     }
@@ -23,6 +24,25 @@ repositories {
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+
+//Se configuran los sources folder de pruebas de modo que se pueda separar la ejecución de las pruebas 
+//de integración de las pruebas de unidad
+sourceSets {
+	integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integration-test/java')
+        }
+        resources.srcDir file('src/integration-test/resources')
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+}
 
 dependencies {
     // tag::jetty[]
@@ -81,9 +101,6 @@ dependencies {
 	
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '3.0'
-}
 
 
 
@@ -95,6 +112,21 @@ bootRun {
 }
 
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.0'
+}
+
+//Se configuran los sources folder de pruebas de modo que se pueda separar la ejecución de las pruebas 
+//de integración de las pruebas de unidad
+task integrationTest(type: Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    outputs.upToDateWhen { false }
+}
+
+//Si queremos que integrationTest se corran dentro del build process
+//check.dependsOn integrationTest
+//integrationTest.mustRunAfter test
 
 
 //Tarea para ejecutar la aplicación desde gradle y configurar los diferentes perfiles de ejecución

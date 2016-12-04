@@ -16,7 +16,7 @@ public class ItemDAOImplTest {
 
 	@Test
 	public void test() {
-
+		//fail("Is not implemented");
 	}
 
 }
