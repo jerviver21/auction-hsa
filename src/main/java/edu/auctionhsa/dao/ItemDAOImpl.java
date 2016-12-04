@@ -8,10 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
-import edu.auctionhsa.Constants;
 import edu.auctionhsa.model.Image;
 import edu.auctionhsa.model.Item;
 import edu.auctionhsa.model.User;
@@ -19,6 +19,12 @@ import edu.auctionhsa.utils.FileManager;
 
 @Repository
 public class ItemDAOImpl extends GenericDAOImpl<Item, Long> implements ItemDAO {
+	
+	@Value("${images.dir}")
+	public String RELATIVE_ITEMS_IMAGES;
+	
+	@Value("${images.path}")
+	public String PATH_ITEMS_IMAGES;
 	
 	@Autowired
 	UserDAO userDAO;
@@ -54,11 +60,12 @@ public class ItemDAOImpl extends GenericDAOImpl<Item, Long> implements ItemDAO {
 	public Item saveImage(Long id, MultipartFile io)throws IOException {
 		Item item = em.getReference(Item.class, id);
 		Set<Image> images = item.getImages();
-		String fullpath = new FileManager().saveFile(Constants.PATH_ITEMS_IMAGES, "img_"+id+"_"+(images.size()+1), io);
+		System.out.println("**************"+PATH_ITEMS_IMAGES+"*****************");
+		String fullpath = new FileManager().saveFile(PATH_ITEMS_IMAGES, "img_"+id+"_"+(images.size()+1), io);
 		Image image = new Image();
-		image.setPath(Constants.RELATIVE_ITEMS_IMAGES+fullpath.replaceAll(".*/(.*)", "$1"));
+		image.setPath(RELATIVE_ITEMS_IMAGES+fullpath.replaceAll(".*/(.*)", "$1"));
 		images.add(image);
-		em.merge(item);
+		em.merge(item); 
 		return item;
 	}
 	

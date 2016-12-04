@@ -12,11 +12,13 @@ import javax.persistence.EntityManager;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.annotation.Profile;
 
 import edu.auctionhsa.model.Bid;
 import edu.auctionhsa.model.Item;
 import edu.auctionhsa.model.User;
 import edu.auctionhsa.model.exception.InvalidAmountException;
+
 
 public class BidDAOImplTest {	
 	//Mocks

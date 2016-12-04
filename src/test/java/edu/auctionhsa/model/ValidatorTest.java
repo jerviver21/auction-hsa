@@ -8,6 +8,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
 import org.junit.Test;
+import org.springframework.context.annotation.Profile;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 /**
@@ -18,6 +19,8 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
  *
  */
 
+
+@Profile("unit")
 public class ValidatorTest {
 	
 	private Validator createValidator() {

@@ -84,3 +84,22 @@ dependencies {
 task wrapper(type: Wrapper) {
     gradleVersion = '3.0'
 }
+
+
+
+//Permite correr desde gradle spring boot.  #gradle bootRun, el profile se cuadra desde esta variable en caso de usar jenkins se debe investigar la forma
+def profiles = 'prod'
+
+bootRun {
+  args = ["--spring.profiles.active=" + profiles]
+}
+
+
+
+
+//Tarea para ejecutar la aplicación desde gradle y configurar los diferentes perfiles de ejecución
+//Se ejecuta el programa con: gradle -PmainClass=edu.auctionhsa.Application execute
+/*task execute(type:JavaExec) {
+   main = mainClass
+   classpath = sourceSets.main.runtimeClasspath
+}*/

@@ -12,11 +12,11 @@ import edu.auctionhsa.Constants;
 public class FileManager {
 	
 	public String saveFile(String dir, String name, MultipartFile io)throws IOException{
-		System.out.println("************"+io.getOriginalFilename()+"************");
-		
 		String ext = io.getOriginalFilename().replaceAll(".*\\.(.*)", "$1");
+		System.out.println("************"+dir+File.separator+name+"."+ext+"************");
+		
+		
 		File file = new File(dir+File.separator+name+"."+ext);
-
 
 	    byte[] buffer = new byte[io.getInputStream().available()];
 	    io.getInputStream().read(buffer);
